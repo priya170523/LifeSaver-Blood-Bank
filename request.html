@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Blood | LifeSaver Blood Bank</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #c62828;
+      color: #fff;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    header h2 {
+      font-size: 23px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 45px auto;
+      padding: 0 18px;
+    }
+
+    .form-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      color: #c62828;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #ef9a9a;
+      border-color: #c62828;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #c62828;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a51e1e;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #formMessage {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    #formMessage.success {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+    }
+
+    #formMessage.error {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .form-card {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>LifeSaver Blood Bank</h2>
+
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="donate.html">Donate</a>
+      <a href="request.html">Request</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="signin.html">Sign In</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-card">
+      <h1>Request Blood</h1>
+
+      <form id="requestForm">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            maxlength="100"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="bloodgroup">Blood Group *</label>
+          <select id="bloodgroup" name="bloodgroup" required>
+            <option value="">Select your blood group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A−</option>
+            <option value="B+">B+</option>
+            <option value="B-">B−</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB−</option>
+            <option value="O+">O+</option>
+            <option value="O-">O−</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="units">Number of Units *</label>
+          <input
+            id="units"
+            name="units"
+            type="number"
+            min="1"
+            max="100"
+            step="1"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="hospital">Hospital Name *</label>
+          <input
+            id="hospital"
+            name="hospital"
+            type="text"
+            maxlength="150"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location *</label>
+          <input
+            id="location"
+            name="location"
+            type="text"
+            maxlength="150"
+            autocomplete="address-level2"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Contact Number *</label>
+          <input
+            id="contact"
+            name="contact"
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9]{10}"
+            minlength="10"
+            maxlength="10"
+            placeholder="10-digit mobile number"
+            title="Enter exactly 10 digits"
+            autocomplete="tel"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Additional Information</label>
+          <textarea
+            id="notes"
+            name="notes"
+            maxlength="1000"
+            placeholder="Additional details (optional)"
+          ></textarea>
+        </div>
+
+        <button id="submitButton" type="submit">
+          Submit Request
+        </button>
+
+        <div id="formMessage" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 LifeSaver Blood Bank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const requestForm = document.getElementById("requestForm");
+    const submitButton = document.getElementById("submitButton");
+    const formMessage = document.getElementById("formMessage");
+
+    requestForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      formMessage.textContent = "";
+      formMessage.className = "";
+      formMessage.style.display = "none";
+
+      const requestData = {
+        name: document.getElementById("name").value.trim(),
+        bloodgroup: document.getElementById("bloodgroup").value,
+        units: Number(document.getElementById("units").value),
+        hospital: document.getElementById("hospital").value.trim(),
+        location: document.getElementById("location").value.trim(),
+        contact: document.getElementById("contact").value.trim(),
+        notes: document.getElementById("notes").value.trim()
+      };
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
+
+      try {
+        const response = await fetch("/api/blood-requests", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.message || "Unable to submit the request."
+          );
+        }
+
+        formMessage.textContent =
+          "Blood request submitted successfully! Request ID: " +
+          (result.request?.id || result.request?._id || "Created");
+
+        formMessage.className = "success";
+        requestForm.reset();
+
+      } catch (error) {
+        formMessage.textContent =
+          error.message ||
+          "Could not connect to the server. Please try again.";
+
+        formMessage.className = "error";
+
+      } finally {
+        formMessage.style.display = "block";
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Request";
+      }
+    });
+  </script>
+</body>
+</html>

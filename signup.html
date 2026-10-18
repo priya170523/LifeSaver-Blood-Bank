@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an Account | LifeSaver Blood Bank</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #c62828;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    header h2 {
+      font-size: 23px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 480px;
+      margin: 45px auto;
+      padding: 0 18px;
+    }
+
+    .signup-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      color: #c62828;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: 2px solid #ef9a9a;
+      border-color: #c62828;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 6px;
+      background: #c62828;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a51e1e;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #formMessage {
+      display: none;
+      padding: 12px;
+      margin-top: 16px;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    #formMessage.success {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+    }
+
+    #formMessage.error {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .signin-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .signin-link a {
+      color: #c62828;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .signup-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>LifeSaver Blood Bank</h2>
+
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="donate.html">Donate</a>
+      <a href="request.html">Request</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="signin.html">Sign In</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="signup-card">
+      <h1>Create an Account</h1>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="name"
+            minlength="2"
+            maxlength="100"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            maxlength="254"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="new-password"
+            minlength="12"
+            maxlength="72"
+            required
+          >
+          <small>Use 12–72 characters and avoid reusing another password.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password *</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            autocomplete="new-password"
+            minlength="12"
+            maxlength="72"
+            required
+          >
+        </div>
+
+        <button type="submit" id="submitButton">Sign Up</button>
+
+        <div id="formMessage" role="status" aria-live="polite"></div>
+      </form>
+
+      <p class="signin-link">
+        Already have an account?
+        <a href="signin.html">Sign In</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 LifeSaver Blood Bank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const submitButton = document.getElementById("submitButton");
+    const formMessage = document.getElementById("formMessage");
+
+    signupForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      formMessage.textContent = "";
+      formMessage.className = "";
+      formMessage.style.display = "none";
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        formMessage.textContent = "Passwords do not match.";
+        formMessage.className = "error";
+        return;
+      }
+
+      if (password.length < 12 || password.length > 72) {
+        formMessage.textContent =
+          "Password must contain 12–72 characters.";
+        formMessage.className = "error";
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Creating Account...";
+
+      try {
+        const response = await fetch("/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || "Registration failed.");
+        }
+
+        formMessage.textContent =
+          "Account created successfully! Redirecting to Sign In...";
+        formMessage.className = "success";
+        signupForm.reset();
+
+        setTimeout(() => {
+          window.location.href = "/signin.html";
+        }, 1200);
+
+      } catch (error) {
+        formMessage.textContent =
+          error.message || "Could not connect to the server.";
+        formMessage.className = "error";
+
+      } finally {
+        formMessage.style.display = "block";
+        submitButton.disabled = false;
+        submitButton.textContent = "Sign Up";
+      }
+    });
+  </script>
+</body>
+</html>

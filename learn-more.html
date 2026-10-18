@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn More Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .learn-more-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    .more-text {
+      display: none;
+      margin-top: 10px;
+      color: #555;
+    }
+    .learn-more-btn {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .learn-more-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="learn-more-container">
+    <h2>Welcome to Our Website</h2>
+    <p>This is a brief intro about our services.</p>
+    <div class="more-text" id="moreText">
+      <p>Here you’ll find more detailed information about what we do, how we work, and how you can get involved. We are committed to providing the best services possible to meet your needs.</p>
+    </div>
+    <button class="learn-more-btn" onclick="toggleText()">Learn More</button>
+  </div>
+
+  <script>
+    function toggleText() {
+      var text = document.getElementById("moreText");
+      var btn = document.querySelector(".learn-more-btn");
+      if (text.style.display === "block") {
+        text.style.display = "none";
+        btn.textContent = "Learn More";
+      } else {
+        text.style.display = "block";
+        btn.textContent = "Show Less";
+      }
+    }
+  </script>
+
+</body>
+</html>

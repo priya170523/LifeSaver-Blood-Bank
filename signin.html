@@ -1,0 +1,169 @@
+cd ~/Desktop/blood
+cat > signin.html <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | LifeSaver Blood Bank</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff5f5;
+      color: #333;
+    }
+    header {
+      background: #b71c1c;
+      color: white;
+      padding: 18px 5%;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 15px; }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+    nav a { color: white; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    main {
+      min-height: 65vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 35px 15px;
+    }
+    .signin-container {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px #00000015;
+    }
+    h2 { text-align: center; color: #b71c1c; }
+    label { display: block; margin: 16px 0 7px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .btn {
+      width: 100%;
+      margin-top: 22px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #b71c1c;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.6; cursor: wait; }
+    .form-footer { text-align: center; margin-top: 20px; }
+    .form-footer a { color: #b71c1c; }
+    #message { margin-top: 15px; text-align: center; }
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #eee;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>LifeSaver Blood Bank</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><a href="request.html">Request</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="signin.html">Sign In</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="signin-container">
+      <h2>Sign In</h2>
+      <form id="signinForm">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email"
+               autocomplete="email" required placeholder="you@example.com">
+
+        <label for="password">Password *</label>
+        <input type="password" id="password" name="password"
+               autocomplete="current-password" required
+               placeholder="Enter your password">
+
+        <button type="submit" class="btn" id="signinButton">Sign In</button>
+        <p id="message" role="status" aria-live="polite"></p>
+      </form>
+      <div class="form-footer">
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 LifeSaver Blood Bank. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("signinForm");
+    const message = document.getElementById("message");
+    const button = document.getElementById("signinButton");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      message.textContent = "";
+      button.disabled = true;
+      button.textContent = "Signing in...";
+
+      try {
+        const response = await fetch("/api/auth/signin", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify({
+            email: document.getElementById("email").value.trim(),
+            password: document.getElementById("password").value
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          message.style.color = "#b71c1c";
+          message.textContent = result.message || "Sign in failed. Please check your details.";
+          return;
+        }
+
+        message.style.color = "green";
+        message.textContent = "Sign in successful! Redirecting...";
+
+        // Redirect to an existing page in your project.
+        window.location.href = "/index.html";
+      } catch (error) {
+        message.style.color = "#b71c1c";
+        message.textContent = "Unable to connect to the server. Please try again.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Sign In";
+      }
+    });
+  </script>
+</body>
+</html>
+EOF
