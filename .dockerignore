@@ -1,0 +1,6 @@
+node_modules
+.env
+.git
+cookies.txt
+signup-backup.html
+npm-debug.log*
